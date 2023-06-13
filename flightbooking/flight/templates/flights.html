@@ -1,0 +1,13 @@
+<html>
+    <body>
+        
+        <ul>
+            {% for field in flights_list %}
+            <!-- <li>{{field.plane}}<span></span><input type="button" name="book"></li> -->
+            Flight: {{ field.plane }}, Departure: {{ field.depart_time }}, Arrival: {{ field.arrival_time }}, From: {{ field.origin }}, To: {{ field.destination }} <a href="{% url 'Booking' field.id %}">Book</a><br/>
+        
+            <!-- <li><input type="submit" name="Book" id="book"></li> -->
+            {% endfor %}
+        </ul>
+    </body>
+</html> 

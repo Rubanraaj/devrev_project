@@ -1,0 +1,13 @@
+<html>
+    <body>
+        <div class="container">
+            <h2>LOG IN</h2>
+            <form id="login-form" action={% url 'login' %} method="post">
+              {% csrf_token %}
+              {{login_form}}
+              <input type="submit" value="Submit">
+            </form>
+            <div id="success-message" class="success-message"></div>
+          </div>
+    </body>
+</html>
