@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Flight Search</title>
+</head>
+<body>
+  <h2>Flight Search</h2>
+  <form method="GET" action="{% url 'search_flights' %}">
+    <label for="depart_date">Departure Date:</label>
+    <input type="date" id="depart_date" name="depart_date" required>
+    <br>
+    <label for="depart_time">Departure Time:</label>
+    <input type="time" id="depart_time" name="depart_time" required>
+    <button type="submit">Search</button>
+  </form>
+
+  {% if flights %}
+    <h3>Search Results:</h3>
+    <ul>
+      {% for flight in flights %}
+        <li>{{ flight.origin }} to {{ flight.destination }} - Departure: {{ flight.depart_time }} - Arrival: {{ flight.arrival_time }}</li>
+        <a href="{% url 'Booking' flight.id %}">Book this Flight</a>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No flights available on the selected date and time.</p>
+
+  {% endif %}
+</body>
+</html>

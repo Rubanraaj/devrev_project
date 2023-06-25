@@ -1,0 +1,9 @@
+<h2>Welcome, {{ request.user.first_name }}!</h2>
+
+<p>Please select an option:</p>
+
+<ul>
+  <li><a href="{% url 'search_flights' %}">Search Flights</a></li>
+  <li><a href="{% url 'BookingList' %}">My Booking</a></li>
+</ul>
+<a href="{% url 'user_logout' %}">Logout</a>

@@ -1,13 +1,15 @@
+
 <html>
     <body>
         <div class="container">
             <h2>LOG IN</h2>
-            <form id="login-form" action={% url 'login' %} method="post">
+            <form id="login-form" action={% url 'user_login' %} method="post">
               {% csrf_token %}
               {{login_form}}
               <input type="submit" value="Submit">
             </form>
             <div id="success-message" class="success-message"></div>
           </div>
+          <p>Don't have an account? <a href="{% url 'signup' %}">Sign up</a></p>
     </body>
 </html>
