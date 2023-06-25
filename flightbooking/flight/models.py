@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from datetime import datetime
-
 # Create your models here.
 
 class UserManager(BaseUserManager):
@@ -54,6 +53,7 @@ class Flight(models.Model):
     plane = models.CharField(max_length=24)
     airline = models.CharField(max_length=64)
     fare = models.FloatField(null=True)
+    total_seats = models.IntegerField(default=60)
 
     def __str__(self):
         return f"{self.id}: {self.origin} to {self.destination}"
@@ -61,6 +61,6 @@ class Flight(models.Model):
 class Booking(models.Model):
     user = models.ForeignKey(User, on_delete = models.DO_NOTHING)
     flight = models.ForeignKey(Flight, on_delete = models.DO_NOTHING)
+    seat_number = models.IntegerField(default=1)
     booking_time = models.DateTimeField(auto_now=True)
-
 

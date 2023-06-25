@@ -8,7 +8,7 @@ from django.urls import reverse
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm 
-
+from django.contrib.auth.decorators import login_required
 
 def signup(request):
     form = UserSignUpForm(request.POST)
@@ -24,15 +24,24 @@ def flightList(request):
     return render(request, 'flights.html', context = {'flights_list':flights})
 
 def bookings(request,flight_id):
-    flight = Flight.objects.get(id = flight_id)
-    user = User.objects.get(id = request.user.id)
-    booking = Booking(user = user, flight = flight)
-    booking.save()
-    return redirect(bookingList)
+    flight = Flight.objects.get(id=flight_id)
+    user = User.objects.get(id=request.user.id)
+    if flight.total_seats > 0:
+        seat_number = flight.total_seats
+        flight.total_seats -= 1
+        flight.save()
+        booking = Booking(user=user, flight=flight, seat_number=seat_number)
+        booking.save()
 
+        return redirect(bookingList)
+    else:
+        return render(request, 'no_seats_available.html')
+
+@login_required
 def bookingList(request):
-    bookings = list(Booking.objects.all())
-    return render(request,'bookings.html', context= {'bookings_list':bookings} )
+    user = request.user
+    bookings = Booking.objects.filter(user=user)  
+    return render(request, 'bookings.html', {'bookings_list': bookings})
 
 def user_login(request):
     if request.method == "POST":
@@ -50,7 +59,7 @@ def user_login(request):
     else:
         form = UserLoginForm()
     return render(request=request, template_name="login.html", context={"login_form": form})
-    
+
 def search_flights(request):
     if request.method == 'GET':
         depart_date = request.GET.get('depart_date')

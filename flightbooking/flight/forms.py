@@ -8,6 +8,7 @@ class UserSignUpForm(ModelForm):
         model = User
         exclude = ['last_login', 'is_active', 'is_superuser','is_staff']
     field_order = ['first_name', 'last_name', 'email' ,'password', 'phone_num']
+    
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields.pop('groups')

@@ -20,14 +20,19 @@
     }
     h2 {
       text-align: center;
+      color: #333;
+      margin-bottom: 30px;
     }
     label {
       display: block;
       margin-top: 10px;
+      color: #333;
+      font-weight: bold;
     }
     input[type="text"],
     input[type="email"],
-    input[type="password"] {
+    input[type="password"],
+    input[type="tel"] {
       width: 100%;
       padding: 10px;
       border: 1px solid #ccc;
@@ -59,13 +64,31 @@
 <body>
   <div class="container">
     <h2>Sign Up</h2>
-    <form id="signup-form" action={% url 'signup' %} method="post">
+    <form id="signup-form" action="{% url 'signup' %}" method="post">
       {% csrf_token %}
-      {{signupform}}
+      <div>
+        <label for="id_first_name">First Name</label>
+        {{ signupform.first_name }}
+      </div>
+      <div>
+        <label for="id_last_name">Last Name</label>
+        {{ signupform.last_name }}
+      </div>
+      <div>
+        <label for="id_email">Email</label>
+        {{ signupform.email }}
+      </div>
+      <div>
+        <label for="id_password">Password</label>
+        {{ signupform.password }}
+      </div>
+      <div>
+        <label for="id_phone_number">Phone Number</label>
+        {{ signupform.phone_number }}
+      </div>
       <input type="submit" value="Submit">
     </form>
     <div id="success-message" class="success-message"></div>
   </div>
-
 </body>
 </html>

@@ -1,13 +1,72 @@
+<!DOCTYPE html>
 <html>
-    <body>
-        
-        <ul>
-            {% for field in bookings_list %}
-            <!-- <li>{{field.plane}}<span></span><input type="button" name="book"></li> -->
-            Flight: {{ field.flight.plane }}, Departure: {{ field.flight.depart_time }}, Arrival: {{ field.flight.arrival_time }}, From: {{ field.flight.origin }}, To: {{ field.flight.destination }} <br/>
-        
-            <!-- <li><input type="submit" name="Book" id="book"></li> -->
-            {% endfor %}
-        </ul>
-    </body>
-</html> 
+<head>
+  <title>Bookings</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      width: 400px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      margin-top: 100px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      text-align: center;
+    }
+    h2 {
+      color: #333;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin-top: 20px;
+      text-align: left;
+    }
+    li {
+      margin-bottom: 10px;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 10px;
+    }
+    li:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    .index {
+      font-weight: bold;
+      margin-right: 10px;
+    }
+    p {
+      margin-top: 20px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Bookings</h2>
+
+    {% if bookings_list %}
+      <ul>
+        {% for booking in bookings_list %}
+          <li>
+            <span class="index">{{ forloop.counter }}.</span>
+            <strong>Flight:</strong> {{ booking.flight.plane }}<br>
+            <strong>Departure:</strong> {{ booking.flight.depart_time }}<br>
+            <strong>Arrival:</strong> {{ booking.flight.arrival_time }}<br>
+            <strong>From:</strong> {{ booking.flight.origin }}<br>
+            <strong>To:</strong> {{ booking.flight.destination }}
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No bookings have been made.</p>
+    {% endif %}
+  </div>
+</body>
+</html>

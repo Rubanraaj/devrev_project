@@ -1,13 +1,84 @@
+<!DOCTYPE html>
 <html>
-    <body>
-        
-        <ul>
-            {% for field in flights_list %}
-            <!-- <li>{{field.plane}}<span></span><input type="button" name="book"></li> -->
-            Flight: {{ field.plane }}, Departure: {{ field.depart_time }}, Arrival: {{ field.arrival_time }}, From: {{ field.origin }}, To: {{ field.destination }} <a href="{% url 'Booking' field.id %}">Book</a><br/>
-        
-            <!-- <li><input type="submit" name="Book" id="book"></li> -->
-            {% endfor %}
-        </ul>
-    </body>
-</html> 
+<head>
+  <title>Flight Search</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      width: 600px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      margin-top: 100px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      text-align: center;
+    }
+    h2 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin-top: 20px;
+      text-align: left;
+    }
+    li {
+      margin-bottom: 20px;
+      padding: 10px;
+      background-color: #f9f9f9;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+    }
+    .flight-details {
+      flex: 1;
+    }
+    .flight-details span {
+      font-weight: bold;
+    }
+    .flight-action {
+      margin-left: 20px;
+    }
+    .book-link {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+    }
+    .book-link:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Flight Search</h2>
+    <ul>
+      {% for field in flights_list %}
+        <li>
+          <div class="flight-details">
+            <span>Flight:</span> {{ field.plane }}<br/>
+            <span>Departure:</span> {{ field.depart_time }}<br/>
+            <span>Arrival:</span> {{ field.arrival_time }}<br/>
+            <span>From:</span> {{ field.origin }}<br/>
+            <span>To:</span> {{ field.destination }}
+          </div>
+          <div class="flight-action">
+            <a href="{% url 'Booking' field.id %}" class="book-link">Book</a>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</body>
+</html>
