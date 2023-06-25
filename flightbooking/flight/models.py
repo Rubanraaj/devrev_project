@@ -59,8 +59,8 @@ class Flight(models.Model):
         return f"{self.id}: {self.origin} to {self.destination}"
 
 class Booking(models.Model):
-    user = models.ForeignKey(User, on_delete = models.DO_NOTHING)
-    flight = models.ForeignKey(Flight, on_delete = models.DO_NOTHING)
+    user = models.ForeignKey(User, on_delete = models.CASCADE)
+    flight = models.ForeignKey(Flight, on_delete = models.CASCADE)
     seat_number = models.IntegerField(default=1)
     booking_time = models.DateTimeField(auto_now=True)
 
